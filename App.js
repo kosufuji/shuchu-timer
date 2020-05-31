@@ -179,13 +179,19 @@ export default class App extends React.Component {
     if (!isNaN(amount)){
       this.storeData("rewardAmount",amount)
       this.setState({rewardAmount:amount})
+    } else {
+      this.storeData("rewardAmount","")
+      this.setState({rewardAmount:""})
     }
   }
 
   changeRewardInterval = (interval) => {
-    if (!isNaN(interval)){
+    if (!isNaN(interval)&&interval!=0){
       this.storeData("rewardInterval",interval)
       this.setState({rewardInterval:interval})
+    } else {
+      this.storeData("rewardInterval","")
+      this.setState({rewardInterval:""})
     }
   }
 
@@ -216,7 +222,7 @@ export default class App extends React.Component {
 
   updateProgress = (time)=>{
     let interval = parseFloat(this.state.rewardInterval)
-    if (!isNaN(interval)){
+    if (!isNaN(interval)&&interval!=0){
       let progressSec = time % (interval*60)
       let progress = progressSec / (interval*60)
       if (this.state.progress > progress){
@@ -228,6 +234,8 @@ export default class App extends React.Component {
       } else {
         this.setState({progress:progress})
       }
+    } else {
+      this.setState({progress:0})
     }
 
   }
@@ -262,8 +270,12 @@ export default class App extends React.Component {
   updateReward = (timeNumber) =>{
     let interval = parseFloat(this.state.rewardInterval)
     let amount = parseFloat(this.state.rewardAmount)
-    let reward = Math.floor(timeNumber/(interval*60)) * amount
-    this.setState({reward:reward})
+    if (interval!=0){
+      let reward = Math.floor(timeNumber/(interval*60)) * amount
+      this.setState({reward:reward})
+    } else {
+      this.setState({reward:0})
+    }
   }
 
   onClickButton = (index) => {
