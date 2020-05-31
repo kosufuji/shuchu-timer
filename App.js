@@ -454,13 +454,10 @@ const styles = StyleSheet.create({
     color:"#929292"
   },
   settingsCloseButton:{
+    width:"100%",
     backgroundColor:'#FF7043',
-    width:'100%'
   },
   settingsCloseButtonContainer:{
-    alignItems:'center',
-    width:'100%',
-    paddingHorizontal:20,
-    marginTop:20
+    width:"100%"
   }
 });
