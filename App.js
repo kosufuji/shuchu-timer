@@ -354,15 +354,7 @@ export default class App extends React.Component {
                     <Text style={styles.settingsDescription}>報酬またはペナルティが与えられる間隔を設定します</Text>
                   </View>
                 } rightIcon={()=><Text style={{fontSize:18}}>分</Text>} maxLength={7}/>
-                <Input label={ 
-                  <View>
-                    <Text style={styles.settingsTitle}>ペナルティモード</Text>
-                    <Text style={styles.settingsDescription}>ペナルティモードは一定間隔で罰金などのペナルティを課すモードです</Text>
-                  </View>
-                } 
-                  InputComponent={()=>
-                  <Switch style={{paddingVertical:10}} onValueChange={this.toggleSwitch} value={this.state.penalty}></Switch>
-                } inputContainerStyle={{borderWidth:1,borderColor:'white'}}/>
+                <InputToggle onValueChange={this.toggleSwitch} value={this.state.penalty}/>
                 <Button
                     title="完了"
                     buttonStyle={styles.settingsCloseButton}
@@ -376,6 +368,17 @@ export default class App extends React.Component {
     );
   }
 }
+
+const InputToggle = (props) => {
+  return(
+      <View style={styles.inputToggleContainer}>
+        <Text style={styles.settingsTitle}>ペナルティモード</Text>
+        <Text style={styles.settingsDescription}>ペナルティモードは一定間隔で罰金などのペナルティを課すモードです</Text>
+        <Switch style={styles.inputToggle} onValueChange={props.onValueChange} value={props.value}></Switch>
+      </View>
+    );
+  }
+
 
 const styles = StyleSheet.create({
   titleCover:{
@@ -459,5 +462,14 @@ const styles = StyleSheet.create({
   },
   settingsCloseButtonContainer:{
     width:"100%"
-  }
+  },
+  inputToggleContainer: {
+    width: '100%',
+    paddingHorizontal: 10,
+    paddingBottom : 20,
+  },
+  inputToggle: {
+    alignSelf: 'flex-start',
+    flex: 1,
+  },
 });
